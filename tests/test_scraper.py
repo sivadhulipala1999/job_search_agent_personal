@@ -1,4 +1,3 @@
-
 from job_search_agent.scraper import is_title_match
 
 
