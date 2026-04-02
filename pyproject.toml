@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "job-search-agent"
+version = "0.1.0"
+description = "A personal job search agent"
+readme = "README.md"
+authors = [
+    {name = "Developer"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+    "pypdf",
+    "python-jobspy",
+    "duckduckgo-search>=5.0.0",
+    "trafilatura>=1.6.0",
+    "openai>=1.0.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "pandas>=2.0.0"
+]
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "flake8>=6.0",
+    "isort>=5.0",
+    "pre-commit>=3.0",
+    "mypy>=1.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["job_search_agent*"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --cov=job_search_agent"
+testpaths = [
+    "tests",
+]
+pythonpath = [
+  "src"
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3

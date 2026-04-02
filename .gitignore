@@ -3,6 +3,14 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# Venv 
+job_search_agent_venv/
+
+# Input/Output Files 
+*.pdf 
+*.md 
+*.json 
+
 # C extensions
 *.so
 
