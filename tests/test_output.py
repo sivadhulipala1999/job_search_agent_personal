@@ -1,6 +1,7 @@
 import os
-from pathlib import Path
+
 from job_search_agent.output import generate_markdown_report
+
 
 def test_generate_markdown_report(tmp_path):
     """Test output generation specifically handles the New vs Repeated segregration and formats correctly."""
@@ -15,7 +16,7 @@ def test_generate_markdown_report(tmp_path):
             "description": "Short desc",
             "score": 95,
             "reasoning": "Perfect match",
-            "status": "New"
+            "status": "New",
         },
         {
             "title": "Repeated Role",
@@ -26,21 +27,23 @@ def test_generate_markdown_report(tmp_path):
             "description": "Short desc 2",
             "score": 88,
             "reasoning": "Good match",
-            "status": "Repeated"
-        }
+            "status": "Repeated",
+        },
     ]
-    
+
     # Run the generator directing output to our tmp_path directory mock
-    output_file = generate_markdown_report(keywords, jobs, output_dir=str(tmp_path), filename="test_curated_list.md")
-    
+    output_file = generate_markdown_report(
+        keywords, jobs, output_dir=str(tmp_path), filename="test_curated_list.md"
+    )
+
     assert os.path.exists(output_file)
     with open(output_file, "r", encoding="utf-8") as f:
         content = f.read()
-        
+
     # Validating core formatting structures exist
     assert "## 🚀 New Jobs" in content
     assert "## ♻️ Repeated Jobs (Still Active)" in content
-    
+
     # Validating data interpolation
     assert "Data Scientist" in content
     assert "OpenAI" in content

@@ -1,11 +1,13 @@
-import pytest
+
 from job_search_agent.scraper import is_title_match
+
 
 def test_is_title_match_exact():
     """Test if exact keywords are successfully matched."""
     keywords = ["AI Engineer", "Machine Learning"]
     assert is_title_match("AI Engineer", keywords) is True
     assert is_title_match("Senior Machine Learning Developer", keywords) is True
+
 
 def test_is_title_match_partial_tokens():
     """Test if partial token intersections correctly allow jobs through."""
@@ -14,11 +16,13 @@ def test_is_title_match_partial_tokens():
     assert is_title_match("Frontend Engineer", keywords) is True
     assert is_title_match("Senior Software Architect", keywords) is True
 
+
 def test_is_title_match_failure():
     """Test if unrelated job titles are correctly dropped."""
     keywords = ["Data Scientist", "Analytics"]
     assert is_title_match("AI Engineer", keywords) is False
     assert is_title_match("Chief Technology Officer", keywords) is False
+
 
 def test_is_title_match_short_tokens():
     """Test that extremely short tokens (len <= 2) like 'AI' are handled carefully."""
